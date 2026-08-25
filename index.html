@@ -12,7 +12,7 @@
     <script>
       document.documentElement.dataset.theme = localStorage.getItem("portfolio-theme") || "light";
     </script>
-    <link rel="stylesheet" href="styles.css?v=20260825-5" />
+    <link rel="stylesheet" href="styles.css?v=20260825-6" />
   </head>
   <body>
     <a class="skip-link" href="#main">Aller au contenu</a>
@@ -71,6 +71,14 @@
             <a class="text-link" href="#ocr-demo">Tester l’OCR <span aria-hidden="true">↘</span></a>
             <a class="text-link" href="https://github.com/KyriannGuede" target="_blank" rel="noreferrer">
               GitHub public <span aria-hidden="true">↗</span>
+            </a>
+            <a
+              class="text-link"
+              href="https://www.linkedin.com/in/kyriann-guede-a459163a0/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              LinkedIn <span aria-hidden="true">↗</span>
             </a>
             <a class="text-link" href="CV_Kyriann_Guede.pdf" target="_blank" rel="noreferrer">
               Consulter le CV <span aria-hidden="true">↗</span>
@@ -284,16 +292,45 @@
       </section>
 
       <section class="contact-section" id="contact" aria-labelledby="contact-title">
-        <span class="section-number">07 / CONTACT</span>
-        <h2 id="contact-title">Prêt à passer<br />du projet au terrain.</h2>
+        <span class="section-number">07 / CANDIDATURE</span>
+        <h2 id="contact-title">Apprendre vite.<br />Contribuer pour de vrai.</h2>
         <div class="contact-footer">
-          <p>
-            Étudiant ingénieur à l’EPITA, je recherche un stage en développement logiciel pour mettre
-            mon goût du backend, des systèmes et du produit au service d’une équipe — apprendre vite,
-            contribuer concrètement et livrer quelque chose d’utile.
-          </p>
-          <div class="contact-actions">
+          <div class="motivation-letter">
+            <p class="letter-salutation">À l’équipe qui me lira,</p>
+            <p>
+              Étudiant ingénieur en troisième année à l’EPITA, je recherche un stage en développement
+              logiciel où je pourrai contribuer à des problèmes concrets tout en progressant aux côtés
+              d’ingénieurs expérimentés.
+            </p>
+            <p>
+              Mes projets m’ont appris à passer d’un besoin à une solution livrable : comprendre les
+              contraintes, concevoir une architecture, travailler en équipe, tester les cas limites et
+              expliquer mes choix. J’ai exploré le backend et les systèmes à travers HTTP, les processus
+              UNIX ou la mémoire, mais aussi le produit avec PING et le machine learning avec un pipeline
+              d’OCR combinant traitement d’image et réseau de neurones.
+            </p>
+            <p>
+              Je souhaite rejoindre une équipe qui valorise la curiosité, la rigueur et l’initiative.
+              Je peux y apporter mon envie d’apprendre vite, mon goût pour les sujets techniques de fond
+              et ma volonté de transformer ce que j’apprends en résultats utiles pour l’équipe et ses
+              utilisateurs.
+            </p>
+            <p class="letter-signoff">
+              Kyriann Guede
+              <span>Étudiant ingénieur EPITA</span>
+            </p>
+          </div>
+          <div class="contact-actions" aria-label="Liens de contact">
+            <p class="contact-invitation">
+              Parlons de votre équipe, de ses enjeux et de ce que je pourrais construire avec vous.
+            </p>
             <a class="contact-mail" href="mailto:kyriannguede@gmail.com">kyriannguede@gmail.com</a>
+            <a
+              class="copy-button"
+              href="https://www.linkedin.com/in/kyriann-guede-a459163a0/"
+              target="_blank"
+              rel="noreferrer"
+            >LinkedIn ↗</a>
             <a class="copy-button" href="CV_Kyriann_Guede.pdf" target="_blank" rel="noreferrer">Voir le CV</a>
             <button class="copy-button" id="copy-email" type="button">Copier l’adresse</button>
           </div>

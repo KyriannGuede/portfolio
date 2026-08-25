@@ -1113,23 +1113,62 @@ kbd {
 
 .contact-footer {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(40px, 10vw, 170px);
-  align-items: end;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+  gap: clamp(48px, 8vw, 130px);
+  align-items: start;
   margin-top: clamp(80px, 11vw, 150px);
   padding-top: 18px;
   border-top: 1px solid var(--signal-ink);
 }
 
-.contact-footer > p {
-  max-width: 620px;
+.motivation-letter {
+  display: grid;
+  gap: 22px;
+  max-width: 780px;
+  padding-left: clamp(18px, 2.4vw, 38px);
+  border-left: 1px solid var(--signal-ink);
+}
+
+.motivation-letter p {
   margin: 0;
-  font-size: clamp(18px, 1.6vw, 24px);
+  font-size: clamp(17px, 1.35vw, 21px);
+  line-height: 1.55;
+}
+
+.motivation-letter .letter-salutation,
+.motivation-letter .letter-signoff {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.motivation-letter .letter-signoff {
+  display: grid;
+  gap: 4px;
+  margin-top: 10px;
+  font-weight: 700;
+}
+
+.letter-signoff span {
+  font-weight: 400;
+  opacity: 0.68;
 }
 
 .contact-actions {
   display: grid;
   gap: 12px;
+  position: sticky;
+  top: 100px;
+}
+
+.contact-invitation {
+  max-width: 430px;
+  margin: 0 0 22px;
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.6;
+  text-transform: uppercase;
 }
 
 .contact-mail {
@@ -1584,6 +1623,14 @@ kbd {
 
   .contact-footer {
     margin-top: 70px;
+  }
+
+  .contact-actions {
+    position: static;
+  }
+
+  .motivation-letter {
+    padding-left: 16px;
   }
 
   .site-footer {

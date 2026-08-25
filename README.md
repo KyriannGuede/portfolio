@@ -12,7 +12,8 @@ Portfolio statique en HTML, CSS et JavaScript, sans framework ni outil de build.
 - laboratoire OCR interactif dans le navigateur et présentation de l'intérêt pour le machine learning ;
 - synchronisation des dépôts publics via l'API GitHub ;
 - thèmes clair et sombre, raccourcis clavier et mise en page responsive ;
-- CV public consultable depuis la navigation et la section contact.
+- section de candidature rédigée comme une courte lettre de motivation ;
+- CV et profil LinkedIn publics accessibles depuis le portfolio.
 
 ## Confidentialité
 
