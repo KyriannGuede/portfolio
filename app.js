@@ -53,6 +53,30 @@ const PROJECTS = [
     capabilities: ["Algorithmique", "Optimisation", "Graphes", "Modélisation", "Aide à la décision", "Travail d’équipe"]
   },
   {
+    id: "ocr",
+    title: "OCR",
+    subtitle: "Reconnaissance de caractères par réseau de neurones",
+    domain: "Machine learning / Vision",
+    signal: "C · SDL2 · Réseau de neurones",
+    categories: ["Machine learning", "Algorithmique"],
+    pitch:
+      "Un pipeline de reconnaissance de caractères développé en équipe : prétraitement d’image, détection et segmentation, apprentissage supervisé puis reconstruction du résultat.",
+    tech: ["C", "SDL2", "GTK", "Traitement d’image", "Réseau de neurones", "EMNIST"],
+    learned: [
+      "Préparer les données — normalisation, binarisation, débruitage et découpage — avant l’apprentissage.",
+      "Implémenter une chaîne d’inférence et comprendre l’influence des poids, biais et fonctions d’activation.",
+      "Évaluer un modèle sur des données séparées et relier sa performance aux choix de représentation."
+    ],
+    work: [
+      "Découper un problème ML en acquisition, préparation, entraînement, évaluation et intégration.",
+      "Partager un pipeline entre trois personnes sans perdre la cohérence des formats intermédiaires.",
+      "Traiter l’expérimentation comme une boucle mesurable plutôt que comme une suite d’intuitions."
+    ],
+    principle:
+      "Un modèle ne compense pas une donnée mal préparée : la qualité du pipeline compte autant que l’algorithme d’apprentissage.",
+    capabilities: ["Machine learning", "Vision", "Traitement d’image", "C", "Algorithmique", "Tests", "Travail d’équipe"]
+  },
+  {
     id: "eplace",
     title: "E/PLACE",
     subtitle: "Canvas collaboratif temps réel",
@@ -256,6 +280,9 @@ const CAPABILITIES = {
   Algorithmique: "Transformer un problème concret en données, contraintes et étapes de calcul explicites.",
   Optimisation: "Comparer des stratégies et arbitrer qualité, coût et temps de calcul avec des métriques.",
   "Aide à la décision": "Rendre les compromis d’un modèle compréhensibles et exploitables par ses utilisateurs.",
+  "Machine learning": "Préparer des données, entraîner un modèle, mesurer ses erreurs et intégrer l’inférence dans un produit.",
+  Vision: "Transformer une image en représentations exploitables par un algorithme ou un modèle.",
+  "Traitement d’image": "Nettoyer, normaliser, segmenter et contrôler les données visuelles avant leur interprétation.",
   Sécurité: "Intégrer identité, permissions, validation et confinement dès la conception.",
   Observabilité: "Rendre un système compréhensible grâce aux journaux, états et signaux de diagnostic.",
   Déploiement: "Reproduire l’environnement d’exécution et livrer un service configurable.",
@@ -287,7 +314,7 @@ const CAPABILITIES = {
   Graphes: "Représenter dépendances et transitions pour calculer un ordre ou un chemin cohérent."
 };
 
-const CATEGORY_ORDER = ["Tous", "Systèmes", "Backend", "Web", "Algorithmique", "Tooling", "Concurrence", "Sécurité"];
+const CATEGORY_ORDER = ["Tous", "Systèmes", "Backend", "Web", "Machine learning", "Algorithmique", "Tooling", "Concurrence", "Sécurité"];
 
 const els = {
   projectIndex: document.querySelector("#project-index"),
@@ -307,6 +334,14 @@ const els = {
   themeToggle: document.querySelector("#theme-toggle"),
   localTime: document.querySelector("#local-time"),
   copyEmail: document.querySelector("#copy-email"),
+  ocrFile: document.querySelector("#ocr-file"),
+  ocrDropzone: document.querySelector("#ocr-dropzone"),
+  ocrCanvas: document.querySelector("#ocr-canvas"),
+  ocrOutput: document.querySelector("#ocr-output"),
+  ocrStatus: document.querySelector("#ocr-status"),
+  runOcr: document.querySelector("#run-ocr"),
+  clearOcr: document.querySelector("#clear-ocr"),
+  copyOcr: document.querySelector("#copy-ocr"),
   toast: document.querySelector("#toast"),
   progress: document.querySelector("#scroll-progress"),
   currentYear: document.querySelector("#current-year")
@@ -317,6 +352,8 @@ const state = {
   query: "",
   capability: "Architecture",
   lastProjectTrigger: null,
+  selectedImage: null,
+  tesseractLoading: null,
   toastTimer: null
 };
 
@@ -598,6 +635,151 @@ async function copyEmail() {
   }
 }
 
+function bindOcr() {
+  if (!els.ocrFile) return;
+
+  els.ocrFile.addEventListener("change", (event) => {
+    const [file] = event.target.files;
+    if (file) loadOcrImage(file);
+  });
+
+  ["dragenter", "dragover"].forEach((eventName) => {
+    els.ocrDropzone.addEventListener(eventName, (event) => {
+      event.preventDefault();
+      els.ocrDropzone.classList.add("is-dragging");
+    });
+  });
+
+  ["dragleave", "drop"].forEach((eventName) => {
+    els.ocrDropzone.addEventListener(eventName, (event) => {
+      event.preventDefault();
+      els.ocrDropzone.classList.remove("is-dragging");
+    });
+  });
+
+  els.ocrDropzone.addEventListener("drop", (event) => {
+    const [file] = event.dataTransfer.files;
+    if (file?.type.startsWith("image/")) loadOcrImage(file);
+  });
+
+  els.runOcr.addEventListener("click", runOcr);
+  els.clearOcr.addEventListener("click", clearOcr);
+  els.copyOcr.addEventListener("click", copyOcrResult);
+}
+
+function loadOcrImage(file) {
+  if (!file.type.startsWith("image/")) {
+    setOcrStatus("Format invalide");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.addEventListener("load", () => {
+    const image = new Image();
+    image.addEventListener("load", () => {
+      state.selectedImage = image;
+      drawOcrImage(image);
+      els.ocrOutput.value = "";
+      setOcrStatus("Image prête");
+    });
+    image.src = reader.result;
+  });
+  reader.addEventListener("error", () => setOcrStatus("Lecture impossible"));
+  reader.readAsDataURL(file);
+}
+
+function drawEmptyOcrCanvas() {
+  if (!els.ocrCanvas) return;
+  const context = els.ocrCanvas.getContext("2d");
+  context.fillStyle = "#f1eee5";
+  context.fillRect(0, 0, els.ocrCanvas.width, els.ocrCanvas.height);
+  context.fillStyle = "#6f6c65";
+  context.font = "20px monospace";
+  context.textAlign = "center";
+  context.fillText("APERÇU DE L’IMAGE", els.ocrCanvas.width / 2, els.ocrCanvas.height / 2);
+}
+
+function drawOcrImage(image) {
+  const canvas = els.ocrCanvas;
+  const context = canvas.getContext("2d");
+  const scale = Math.min(canvas.width / image.width, canvas.height / image.height);
+  const width = image.width * scale;
+  const height = image.height * scale;
+
+  context.fillStyle = "#f1eee5";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  context.drawImage(image, (canvas.width - width) / 2, (canvas.height - height) / 2, width, height);
+}
+
+async function runOcr() {
+  if (!state.selectedImage) {
+    setOcrStatus("Ajoutez une image");
+    return;
+  }
+
+  els.runOcr.disabled = true;
+  setOcrStatus("Chargement du moteur");
+
+  try {
+    await ensureTesseract();
+    const result = await window.Tesseract.recognize(els.ocrCanvas, "eng+fra", {
+      logger(message) {
+        if (message.status === "recognizing text") {
+          setOcrStatus(`Analyse ${Math.round(message.progress * 100)}%`);
+        }
+      }
+    });
+    els.ocrOutput.value = result.data.text.trim() || "Aucun texte reconnu.";
+    setOcrStatus("Terminé");
+  } catch (error) {
+    els.ocrOutput.value =
+      "Le moteur OCR navigateur n’a pas pu être chargé. L’image reste locale et peut être réessayée lorsque le CDN est accessible.";
+    setOcrStatus("Moteur indisponible");
+  } finally {
+    els.runOcr.disabled = false;
+  }
+}
+
+function ensureTesseract() {
+  if (window.Tesseract) return Promise.resolve();
+  if (state.tesseractLoading) return state.tesseractLoading;
+
+  state.tesseractLoading = new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js";
+    script.async = true;
+    script.addEventListener("load", resolve);
+    script.addEventListener("error", reject);
+    document.head.append(script);
+  });
+  return state.tesseractLoading;
+}
+
+function clearOcr() {
+  state.selectedImage = null;
+  els.ocrFile.value = "";
+  els.ocrOutput.value = "";
+  drawEmptyOcrCanvas();
+  setOcrStatus("Prêt");
+}
+
+async function copyOcrResult() {
+  if (!els.ocrOutput.value.trim()) return;
+  try {
+    await navigator.clipboard.writeText(els.ocrOutput.value);
+    setOcrStatus("Texte copié");
+    showToast("Résultat OCR copié.");
+  } catch (error) {
+    els.ocrOutput.focus();
+    els.ocrOutput.select();
+    setOcrStatus("Sélectionné");
+  }
+}
+
+function setOcrStatus(message) {
+  els.ocrStatus.textContent = message;
+}
+
 function handleInitialHash() {
   const match = window.location.hash.match(/^#project-(.+)$/);
   if (match) openProject(match[1]);
@@ -620,6 +802,7 @@ function bindEvents() {
 
   els.themeToggle.addEventListener("click", updateTheme);
   els.copyEmail.addEventListener("click", copyEmail);
+  bindOcr();
   window.addEventListener("scroll", updateScrollProgress, { passive: true });
 
   document.addEventListener("keydown", (event) => {
@@ -638,6 +821,7 @@ function init() {
   renderCapabilities();
   renderCapabilityReadout();
   bindEvents();
+  drawEmptyOcrCanvas();
   loadGitHub();
   updateClock();
   updateScrollProgress();

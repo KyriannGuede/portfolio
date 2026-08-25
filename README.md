@@ -4,11 +4,12 @@ Portfolio statique en HTML, CSS et JavaScript, sans framework ni outil de build.
 
 ## Contenu
 
-- index éditorial de dix projets académiques ;
+- index éditorial de onze projets académiques, dont un projet OCR en C ;
 - fiches détaillées orientées compétences et recrutement ;
 - parcours de cinq piscines intensives en C, SQL, Java, C++ et JavaScript ;
 - recherche et filtres par domaine ;
 - carte interactive des compétences ;
+- laboratoire OCR interactif dans le navigateur et présentation de l'intérêt pour le machine learning ;
 - synchronisation des dépôts publics via l'API GitHub ;
 - thèmes clair et sombre, raccourcis clavier et mise en page responsive ;
 - CV public consultable depuis la navigation et la section contact.
@@ -19,6 +20,10 @@ Les documents académiques utilisés comme sources restent strictement locaux. I
 dans ce dépôt. Le site ne publie ni énoncés, ni code privé, ni jeux de tests, ni détails permettant de
 reconstituer les sujets. Seuls des résumés généraux, technologies et apprentissages transférables sont
 présentés.
+
+La démonstration publique s'appuie sur Tesseract.js et traite l'image sélectionnée dans le navigateur.
+Elle illustre l'usage de l'OCR sans exposer le code du projet académique, qui reposait sur une chaîne
+personnalisée en C : prétraitement d'image, segmentation et réseau de neurones.
 
 ## Lancer en local
 
