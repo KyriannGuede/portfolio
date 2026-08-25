@@ -1172,9 +1172,9 @@ kbd {
 }
 
 .contact-mail {
-  overflow-wrap: anywhere;
+  white-space: nowrap;
   font-family: var(--display);
-  font-size: clamp(24px, 3vw, 46px);
+  font-size: clamp(18px, 5vw, 46px);
   font-weight: 700;
   letter-spacing: -0.04em;
 }
