@@ -4,12 +4,14 @@ Portfolio statique en HTML, CSS et JavaScript, sans framework ni outil de build.
 
 ## Contenu
 
-- index éditorial de neuf projets académiques ;
+- index éditorial de dix projets académiques ;
 - fiches détaillées orientées compétences et recrutement ;
+- parcours de cinq piscines intensives en C, SQL, Java, C++ et JavaScript ;
 - recherche et filtres par domaine ;
 - carte interactive des compétences ;
 - synchronisation des dépôts publics via l'API GitHub ;
-- thèmes clair et sombre, raccourcis clavier et mise en page responsive.
+- thèmes clair et sombre, raccourcis clavier et mise en page responsive ;
+- CV public consultable depuis la navigation et la section contact.
 
 ## Confidentialité
 

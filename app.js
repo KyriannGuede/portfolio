@@ -7,26 +7,50 @@ const PROJECTS = [
   {
     id: "ping",
     title: "PING",
-    subtitle: "Backend produit sécurisé",
-    domain: "Backend / Produit",
-    signal: "Java · Quarkus · PostgreSQL",
-    categories: ["Backend", "Sécurité"],
+    subtitle: "Produit full-stack piloté par le besoin",
+    domain: "Full-stack / Produit",
+    signal: "Java · Quarkus · React",
+    categories: ["Backend", "Web", "Sécurité"],
     pitch:
-      "Le socle backend d’un produit complet : identité, droits d’accès, persistance, fichiers, journalisation et déploiement reproductible.",
-    tech: ["Java 21", "Quarkus", "PostgreSQL", "REST", "JWT", "Docker", "Maven"],
+      "Un produit métier conçu de bout en bout à partir du besoin d’un client : ateliers de cadrage, maquettes, revues régulières, frontend opérationnel et backend sécurisé.",
+    tech: ["Java 21", "Quarkus", "React", "Vite", "PostgreSQL", "REST", "JWT", "Docker"],
     learned: [
-      "Concevoir une API autour de contrats clairs et de statuts HTTP cohérents.",
-      "Relier authentification, autorisation, persistance et accès au système de fichiers.",
-      "Packager un service avec sa base de données pour reproduire le même environnement partout."
+      "Transformer les échanges avec un client en parcours, maquettes et priorités produit vérifiables.",
+      "Relier une interface React aux contrats REST, à l’authentification et aux règles métier du backend.",
+      "Utiliser les démonstrations intermédiaires pour détecter tôt les écarts et ajuster la solution."
     ],
     work: [
-      "Collaborer avec un frontend à partir d’un contrat d’API partagé.",
-      "Intégrer la sécurité et l’observabilité dans le flux normal de développement.",
-      "Livrer un service testable, configurable et exploitable hors de la machine du développeur."
+      "Conduire des rendez-vous de suivi, reformuler le besoin et rendre les arbitrages visibles.",
+      "Prototyper une expérience avant d’investir dans l’implémentation complète.",
+      "Assumer une responsabilité full-stack : interface, API, données, sécurité, tests et déploiement."
     ],
     principle:
-      "Un backend utile ne se limite pas à répondre : il doit refuser correctement, expliquer ses erreurs et rester déployable.",
-    capabilities: ["Architecture", "API design", "Sécurité", "Observabilité", "Déploiement", "Travail d’équipe"]
+      "Un produit n’est pas réussi parce qu’il fonctionne : il l’est lorsque le besoin compris, la solution livrée et l’usage réel restent alignés.",
+    capabilities: ["Relation client", "Conception produit", "Frontend", "Architecture", "API design", "Sécurité", "Déploiement", "Travail d’équipe"]
+  },
+  {
+    id: "ero1",
+    title: "ERO1",
+    subtitle: "Optimisation du déneigement",
+    domain: "Algorithmique / Décision",
+    signal: "Python · Graphes · Heuristiques",
+    categories: ["Algorithmique", "Tooling"],
+    pitch:
+      "Un prototype d’aide à la décision pour organiser des tournées de déneigement à Montréal selon plusieurs priorités : coût, mobilité et équité territoriale.",
+    tech: ["Python", "JSON", "Graphes", "Heuristique gloutonne", "LPT", "Indicateurs"],
+    learned: [
+      "Traduire un problème opérationnel en graphe, contraintes, objectifs et métriques comparables.",
+      "Choisir une heuristique lorsque la résolution exacte devient trop coûteuse à grande échelle.",
+      "Équilibrer la charge entre véhicules et mesurer explicitement les compromis produits par chaque scénario."
+    ],
+    work: [
+      "Justifier un choix d’algorithme à partir des contraintes de temps, de données et de précision.",
+      "Comparer plusieurs stratégies avec des indicateurs lisibles plutôt qu’avec une intuition unique.",
+      "Documenter les limites d’un prototype et identifier les étapes nécessaires à son industrialisation."
+    ],
+    principle:
+      "L’optimisation utile ne cherche pas un score abstrait : elle rend visibles les compromis entre coût, qualité de service et équité.",
+    capabilities: ["Algorithmique", "Optimisation", "Graphes", "Modélisation", "Aide à la décision", "Travail d’équipe"]
   },
   {
     id: "eplace",
@@ -227,6 +251,11 @@ const PROJECTS = [
 const CAPABILITIES = {
   Architecture: "Découper un système, expliciter les responsabilités et préserver des interfaces stables.",
   "API design": "Définir des contrats prévisibles, des erreurs utiles et des frontières nettes entre services.",
+  "Relation client": "Écouter, reformuler et valider régulièrement pour maintenir le produit aligné avec le besoin réel.",
+  "Conception produit": "Passer d’un besoin à des parcours, maquettes, priorités et incréments démontrables.",
+  Algorithmique: "Transformer un problème concret en données, contraintes et étapes de calcul explicites.",
+  Optimisation: "Comparer des stratégies et arbitrer qualité, coût et temps de calcul avec des métriques.",
+  "Aide à la décision": "Rendre les compromis d’un modèle compréhensibles et exploitables par ses utilisateurs.",
   Sécurité: "Intégrer identité, permissions, validation et confinement dès la conception.",
   Observabilité: "Rendre un système compréhensible grâce aux journaux, états et signaux de diagnostic.",
   Déploiement: "Reproduire l’environnement d’exécution et livrer un service configurable.",
@@ -258,7 +287,7 @@ const CAPABILITIES = {
   Graphes: "Représenter dépendances et transitions pour calculer un ordre ou un chemin cohérent."
 };
 
-const CATEGORY_ORDER = ["Tous", "Systèmes", "Backend", "Web", "Tooling", "Concurrence", "Sécurité"];
+const CATEGORY_ORDER = ["Tous", "Systèmes", "Backend", "Web", "Algorithmique", "Tooling", "Concurrence", "Sécurité"];
 
 const els = {
   projectIndex: document.querySelector("#project-index"),

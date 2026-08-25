@@ -12,7 +12,7 @@
     <script>
       document.documentElement.dataset.theme = localStorage.getItem("portfolio-theme") || "light";
     </script>
-    <link rel="stylesheet" href="styles.css?v=20260825-2" />
+    <link rel="stylesheet" href="styles.css?v=20260825-4" />
   </head>
   <body>
     <a class="skip-link" href="#main">Aller au contenu</a>
@@ -30,7 +30,9 @@
       <nav class="main-nav" aria-label="Navigation principale">
         <a href="#work">Projets</a>
         <a href="#skills">Compétences</a>
+        <a href="#learning">Piscines</a>
         <a href="#open-work">GitHub</a>
+        <a href="CV_Kyriann_Guede.pdf" target="_blank" rel="noreferrer">CV</a>
         <a href="#contact">Contact</a>
       </nav>
 
@@ -67,12 +69,15 @@
             <a class="text-link" href="https://github.com/KyriannGuede" target="_blank" rel="noreferrer">
               GitHub public <span aria-hidden="true">↗</span>
             </a>
+            <a class="text-link" href="CV_Kyriann_Guede.pdf" target="_blank" rel="noreferrer">
+              Consulter le CV <span aria-hidden="true">↗</span>
+            </a>
           </div>
         </div>
 
         <div class="hero-index" aria-label="Résumé du portfolio">
-          <div><strong>09</strong><span>projets académiques documentés</span></div>
-          <div><strong>04</strong><span>terrains : système, backend, web, tooling</span></div>
+          <div><strong>10</strong><span>projets académiques documentés</span></div>
+          <div><strong>05</strong><span>terrains : système, produit, web, tooling, algo</span></div>
           <div><strong>01</strong><span>principe : comprendre avant d’abstraire</span></div>
         </div>
       </section>
@@ -130,10 +135,57 @@
         </div>
       </section>
 
+      <section class="learning-section" id="learning" aria-labelledby="learning-title">
+        <div class="section-heading">
+          <div>
+            <span class="section-number">03 / INTENSIVE LEARNING</span>
+            <h2 id="learning-title">Six semaines.<br />Cinq écosystèmes.</h2>
+          </div>
+          <p>
+            Des formats intensifs pour apprendre vite, pratiquer les idiomes d’un langage et passer
+            du concept à un programme testable sous contrainte de temps.
+          </p>
+        </div>
+
+        <div class="pool-grid">
+          <article class="pool-card pool-card--lead">
+            <span class="pool-duration">02 semaines</span>
+            <h3>C</h3>
+            <p>Fondamentaux, pointeurs, mémoire, structures de données, modularité, compilation et débogage.</p>
+          </article>
+          <article class="pool-card">
+            <span class="pool-duration">01 semaine</span>
+            <h3>SQL</h3>
+            <p>Modèle relationnel, requêtes, jointures, agrégations et manipulation structurée des données.</p>
+          </article>
+          <article class="pool-card">
+            <span class="pool-duration">01 semaine</span>
+            <h3>Java</h3>
+            <p>Programmation objet, collections, exceptions, flux de données et outillage de l’écosystème.</p>
+          </article>
+          <article class="pool-card">
+            <span class="pool-duration">01 semaine</span>
+            <h3>C++</h3>
+            <p>Objets, gestion des ressources, bibliothèque standard, généricité et polymorphisme.</p>
+          </article>
+          <article class="pool-card">
+            <span class="pool-duration">01 semaine</span>
+            <h3>JavaScript</h3>
+            <p>Fonctions, objets, modules, manipulation du DOM, événements et programmation asynchrone.</p>
+          </article>
+        </div>
+
+        <p class="pool-takeaway">
+          <span>Ce que la cadence entraîne</span>
+          Lire une documentation rapidement, isoler l’essentiel, expérimenter, demander du feedback
+          et rendre une solution compréhensible avant la prochaine itération.
+        </p>
+      </section>
+
       <section class="method-section" aria-labelledby="method-title">
         <div class="section-heading">
           <div>
-            <span class="section-number">03 / WORKING MODE</span>
+            <span class="section-number">04 / WORKING MODE</span>
             <h2 id="method-title">Ma façon d’aborder un problème</h2>
           </div>
         </div>
@@ -150,7 +202,7 @@
       <section class="open-work" id="open-work" aria-labelledby="open-work-title">
         <div class="section-heading">
           <div>
-            <span class="section-number">04 / OPEN WORK</span>
+            <span class="section-number">05 / OPEN WORK</span>
             <h2 id="open-work-title">Ce qui est public sur GitHub</h2>
           </div>
           <p id="github-status">Synchronisation avec le profil public…</p>
@@ -159,7 +211,7 @@
       </section>
 
       <section class="contact-section" id="contact" aria-labelledby="contact-title">
-        <span class="section-number">05 / CONTACT</span>
+        <span class="section-number">06 / CONTACT</span>
         <h2 id="contact-title">Un problème intéressant<br />à démonter ensemble ?</h2>
         <div class="contact-footer">
           <p>
@@ -168,6 +220,7 @@
           </p>
           <div class="contact-actions">
             <a class="contact-mail" href="mailto:kyriannguede@gmail.com">kyriannguede@gmail.com</a>
+            <a class="copy-button" href="CV_Kyriann_Guede.pdf" target="_blank" rel="noreferrer">Voir le CV</a>
             <button class="copy-button" id="copy-email" type="button">Copier l’adresse</button>
           </div>
         </div>
@@ -190,6 +243,6 @@
     </dialog>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="app.js?v=20260825-2"></script>
+    <script src="app.js?v=20260825-4"></script>
   </body>
 </html>

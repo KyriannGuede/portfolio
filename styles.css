@@ -386,6 +386,7 @@ section {
 }
 
 .work-section,
+.learning-section,
 .method-section,
 .open-work {
   padding-top: clamp(90px, 11vw, 170px);
@@ -708,6 +709,83 @@ kbd {
 .capability-readout li::before {
   content: "0" counter(related);
   color: var(--signal);
+}
+
+.pool-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.pool-card {
+  grid-column: span 2;
+  min-width: 0;
+  min-height: 310px;
+  padding: 18px;
+  overflow: hidden;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.pool-card--lead {
+  grid-column: span 4;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.pool-duration {
+  color: var(--signal);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pool-card h3 {
+  margin: 86px 0 20px;
+  font-family: var(--display);
+  font-size: clamp(32px, 2.7vw, 44px);
+  letter-spacing: -0.06em;
+  line-height: 0.9;
+  overflow-wrap: anywhere;
+  text-transform: uppercase;
+}
+
+.pool-card--lead h3 {
+  font-size: clamp(56px, 6vw, 96px);
+}
+
+.pool-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.pool-card--lead p {
+  max-width: 420px;
+  color: color-mix(in srgb, var(--paper) 72%, transparent);
+  font-size: 15px;
+}
+
+.pool-takeaway {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.5fr) minmax(0, 1.5fr);
+  gap: 30px;
+  margin: 42px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--ink);
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.pool-takeaway span {
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .method-track {
@@ -1071,6 +1149,20 @@ kbd {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .pool-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pool-card,
+  .pool-card--lead {
+    grid-column: span 1;
+    min-height: 250px;
+  }
+
+  .pool-card--lead {
+    grid-column: span 2;
+  }
+
   .method-track li {
     min-height: 220px;
     border-bottom: 1px solid var(--line);
@@ -1192,6 +1284,24 @@ kbd {
   }
 
   .method-track {
+    grid-template-columns: 1fr;
+  }
+
+  .pool-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pool-card,
+  .pool-card--lead {
+    grid-column: 1;
+    min-height: 220px;
+  }
+
+  .pool-card h3 {
+    margin-top: 56px;
+  }
+
+  .pool-takeaway {
     grid-template-columns: 1fr;
   }
 
