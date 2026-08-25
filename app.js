@@ -53,15 +53,17 @@ const PROJECTS = [
     capabilities: ["Frontend", "Temps réel", "Authentification", "Résilience", "UX technique", "Debugging"]
   },
   {
-    id: "tigros",
-    title: "TIGROS",
-    subtitle: "Chaîne de compilation",
+    id: "tiger",
+    title: "TIGER",
+    subtitle: "Compilateur progressif",
     domain: "Compilateurs / C++",
     signal: "C++ · RE/Flex · Bison",
     categories: ["Systèmes", "Tooling"],
     pitch:
-      "Une chaîne de compilation complète pour un langage réduit : analyse lexicale, syntaxe, arbre abstrait, vérifications sémantiques et génération de C.",
-    tech: ["C++", "RE/Flex", "Bison", "AST", "C", "Autotools"],
+      "Un compilateur construit par étapes pour le langage Tiger : analyse lexicale et syntaxique, arbre abstrait, résolution des noms, typage et représentations intermédiaires.",
+    tech: ["C++", "RE/Flex", "Bison", "AST", "IR", "Autotools"],
+    sourceUrl: "https://assignments.lre.epita.fr/",
+    sourceLabel: "Tiger Project Assignment",
     learned: [
       "Transformer une grammaire en représentations intermédiaires manipulables.",
       "Séparer les passes : parsing, liaison des symboles, typage et génération de code.",
@@ -392,6 +394,13 @@ function openProject(projectId, trigger = null) {
       <h2 id="dialog-title">${escapeHTML(project.title)}</h2>
       <p class="dialog-pitch">${escapeHTML(project.pitch)}</p>
       <div class="stack-line">${project.tech.map((tech) => `<span>${escapeHTML(tech)}</span>`).join("")}</div>
+      ${
+        project.sourceUrl
+          ? `<a class="text-link dialog-source-link" href="${escapeHTML(project.sourceUrl)}" target="_blank" rel="noreferrer">
+              Référence publique : ${escapeHTML(project.sourceLabel)} <span aria-hidden="true">↗</span>
+            </a>`
+          : ""
+      }
       <p class="confidential-note">
         Présentation volontairement synthétique. Aucun énoncé, code source, jeu de tests ou détail
         permettant de reconstituer le sujet académique n’est publié.
