@@ -1,200 +1,195 @@
 <!doctype html>
 <html lang="fr">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Portfolio de projets GitHub avec tableau de bord, fiches projets et demos interactives."
-    >
-    <title>Portfolio Projets GitHub</title>
-    <link rel="stylesheet" href="styles.css">
+      content="Portfolio de Kyriann Guede, développeur orienté systèmes, backend et produits web."
+    />
+    <meta name="theme-color" content="#f1eee5" />
+    <title>Kyriann Guede — Software, systems &amp; product</title>
+    <script>
+      document.documentElement.dataset.theme = localStorage.getItem("portfolio-theme") || "light";
+    </script>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header class="topbar">
-      <a class="brand" href="#overview" data-view-trigger="overview" aria-label="Retour au tableau de bord">
-        <span class="brand-mark">KG</span>
+    <a class="skip-link" href="#main">Aller au contenu</a>
+    <div class="progress" aria-hidden="true"><span id="scroll-progress"></span></div>
+
+    <header class="site-header">
+      <a class="identity" href="#top" aria-label="Retour en haut de page">
+        <span class="identity-mark" aria-hidden="true">KG</span>
         <span>
-          <strong id="profile-name">Kyriann Guede</strong>
-          <small>Portfolio technique</small>
+          <strong>Kyriann Guede</strong>
+          <small>Software engineering / Paris</small>
         </span>
       </a>
 
-      <nav class="tabs" aria-label="Sections du portfolio">
-        <button class="tab is-active" type="button" data-view="overview">Dashboard</button>
-        <button class="tab" type="button" data-view="projects">Projets</button>
-        <button class="tab" type="button" data-view="demos">Demos</button>
-        <button class="tab" type="button" data-view="profile">Profil</button>
+      <nav class="main-nav" aria-label="Navigation principale">
+        <a href="#work">Projets</a>
+        <a href="#skills">Compétences</a>
+        <a href="#open-work">GitHub</a>
+        <a href="#contact">Contact</a>
       </nav>
+
+      <div class="header-actions">
+        <span class="local-time" id="local-time" aria-label="Heure locale à Paris">PAR — --:--</span>
+        <button class="icon-button" id="theme-toggle" type="button" aria-label="Changer de thème">
+          <span aria-hidden="true">◐</span>
+        </button>
+      </div>
     </header>
 
-    <main>
-      <section class="view is-active" id="overview" aria-labelledby="overview-title">
-        <div class="intro">
-          <div class="intro-copy">
-            <p class="eyebrow">Disponible pour stage, alternance ou premier role technique</p>
-            <h1 id="overview-title">Une vitrine claire pour montrer mes projets, mon code et mes demos.</h1>
-            <p>
-              Ce site regroupe mes projets publics, met en avant les points techniques importants
-              et permet de tester certaines fonctionnalites directement dans le navigateur.
-            </p>
-            <div class="actions">
-              <a class="button primary" id="github-profile-link" href="#" target="_blank" rel="noreferrer">GitHub</a>
-              <button class="button" type="button" data-view-trigger="demos">Tester une demo</button>
-            </div>
-          </div>
-
-          <aside class="profile-panel" aria-label="Resume GitHub">
-            <img id="avatar" alt="" src="">
-            <div>
-              <strong id="github-login">GitHub</strong>
-              <span id="github-bio">Chargement du profil public...</span>
-            </div>
-          </aside>
+    <main id="main">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero-kicker">
+          <span class="status-dot" aria-hidden="true"></span>
+          Disponible pour une expérience technique
         </div>
 
-        <div class="metrics" aria-label="Indicateurs">
-          <article>
-            <span id="metric-repos">0</span>
-            <strong>Repos publics</strong>
-          </article>
-          <article>
-            <span id="metric-stars">0</span>
-            <strong>Stars</strong>
-          </article>
-          <article>
-            <span id="metric-languages">0</span>
-            <strong>Langages</strong>
-          </article>
-          <article>
-            <span id="metric-demos">1</span>
-            <strong>Demo embarquee</strong>
-          </article>
+        <h1 id="hero-title">
+          Je construis entre
+          <span class="hero-accent">le protocole</span>
+          et le produit.
+        </h1>
+
+        <div class="hero-bottom">
+          <p class="hero-intro">
+            Développeur curieux des couches invisibles : mémoire, processus, réseau, compilation,
+            API et interfaces temps réel. J’aime comprendre un système de bout en bout, puis le rendre
+            plus clair, plus fiable et plus simple à utiliser.
+          </p>
+
+          <div class="hero-links">
+            <a class="text-link" href="#work">Explorer les projets <span aria-hidden="true">↘</span></a>
+            <a class="text-link" href="https://github.com/KyriannGuede" target="_blank" rel="noreferrer">
+              GitHub public <span aria-hidden="true">↗</span>
+            </a>
+          </div>
         </div>
 
-        <section class="section-head" aria-labelledby="featured-title">
-          <div>
-            <h2 id="featured-title">Projets a montrer en premier</h2>
-            <p>Selection courte pour recruteurs : impact, stack et liens directs.</p>
-          </div>
-          <button class="button ghost" type="button" data-view-trigger="projects">Voir tous les projets</button>
-        </section>
-        <div class="project-grid" id="featured-projects"></div>
+        <div class="hero-index" aria-label="Résumé du portfolio">
+          <div><strong>09</strong><span>projets académiques documentés</span></div>
+          <div><strong>04</strong><span>terrains : système, backend, web, tooling</span></div>
+          <div><strong>01</strong><span>principe : comprendre avant d’abstraire</span></div>
+        </div>
       </section>
 
-      <section class="view" id="projects" aria-labelledby="projects-title">
-        <section class="section-head compact">
+      <section class="work-section" id="work" aria-labelledby="work-title">
+        <div class="section-heading">
           <div>
-            <h1 id="projects-title">Projets publics</h1>
-            <p>Les depots GitHub sont recuperes automatiquement, puis combines aux projets mis en avant.</p>
+            <span class="section-number">01 / SELECTED WORK</span>
+            <h2 id="work-title">Index des projets</h2>
           </div>
-          <label class="search">
-            <span>Filtrer</span>
-            <input id="project-search" type="search" placeholder="Nom, langage, sujet...">
+          <p>
+            Les sujets académiques restent confidentiels. Les fiches présentent uniquement les
+            enjeux généraux, les technologies et les compétences transférables.
+          </p>
+        </div>
+
+        <div class="project-tools">
+          <label class="search-field" for="project-search">
+            <span>Rechercher</span>
+            <input id="project-search" type="search" placeholder="Projet, techno, compétence…" autocomplete="off" />
+            <kbd>/</kbd>
           </label>
-        </section>
-
-        <div class="toolbar" aria-label="Filtres projets">
-          <button class="chip is-active" type="button" data-filter="all">Tous</button>
-          <button class="chip" type="button" data-filter="featured">Selection</button>
-          <button class="chip" type="button" data-filter="github">GitHub</button>
-          <button class="chip" type="button" data-filter="demo">Testable</button>
+          <div class="lens-list" id="project-filters" aria-label="Filtrer les projets"></div>
         </div>
 
-        <div class="project-grid" id="all-projects"></div>
-        <p class="empty" id="project-empty" hidden>Aucun projet ne correspond a ce filtre.</p>
+        <div class="project-table-head" aria-hidden="true">
+          <span>Projet</span><span>Domaine</span><span>Signal technique</span><span>Lire</span>
+        </div>
+        <div class="project-index" id="project-index"></div>
+        <p class="empty-state" id="project-empty" hidden>Aucun projet ne correspond à ce filtre.</p>
       </section>
 
-      <section class="view" id="demos" aria-labelledby="demos-title">
-        <section class="section-head compact">
+      <section class="skills-section" id="skills" aria-labelledby="skills-title">
+        <div class="section-heading inverse">
           <div>
-            <h1 id="demos-title">Demos interactives</h1>
-            <p>Le module OCR fonctionne cote navigateur avec Tesseract.js quand le CDN est accessible.</p>
+            <span class="section-number">02 / CAPABILITY MAP</span>
+            <h2 id="skills-title">Ce que ces projets entraînent vraiment</h2>
           </div>
-        </section>
+          <p>
+            Cliquez sur une compétence pour retrouver les projets où elle a été mobilisée. Ce n’est
+            pas une liste de mots-clés : chaque signal renvoie à un contexte concret.
+          </p>
+        </div>
 
-        <div class="demo-layout">
-          <section class="tool-panel" aria-labelledby="ocr-title">
-            <div class="tool-title">
-              <div>
-                <h2 id="ocr-title">OCR image vers texte</h2>
-                <p>Depose une image contenant du texte, lance l'analyse, puis copie le resultat.</p>
-              </div>
-              <span class="status" id="ocr-status">Pret</span>
-            </div>
-
-            <label class="dropzone" id="dropzone">
-              <input id="ocr-file" type="file" accept="image/*">
-              <span>Choisir ou deposer une image</span>
-              <small>PNG, JPG, WEBP</small>
-            </label>
-
-            <div class="preview-row">
-              <canvas id="ocr-canvas" width="640" height="360" aria-label="Apercu image OCR"></canvas>
-              <div class="output-box">
-                <div class="output-actions">
-                  <strong>Sortie OCR</strong>
-                  <button class="icon-button" type="button" id="copy-ocr" title="Copier le texte">Copier</button>
-                </div>
-                <textarea id="ocr-output" spellcheck="false" placeholder="Le texte reconnu apparaitra ici."></textarea>
-              </div>
-            </div>
-
-            <div class="actions">
-              <button class="button primary" type="button" id="run-ocr">Analyser l'image</button>
-              <button class="button" type="button" id="clear-ocr">Reinitialiser</button>
-            </div>
-          </section>
-
-          <aside class="implementation-note">
-            <h2>Branchement possible sur ton vrai OCR</h2>
-            <p>
-              Ton OCR local est ecrit en C. Pour utiliser exactement ce moteur dans le site, il faudra
-              l'exposer via une API, ou le compiler en WebAssembly. La demo actuelle donne deja aux
-              recruteurs une interaction concrete sans backend.
+        <div class="capability-layout">
+          <div class="capability-cloud" id="capability-cloud" aria-label="Carte interactive des compétences"></div>
+          <aside class="capability-readout" aria-live="polite">
+            <span class="readout-label">Signal actif</span>
+            <strong id="capability-name">Architecture</strong>
+            <p id="capability-description">
+              Découper un système, expliciter les responsabilités et préserver des interfaces stables.
             </p>
-            <ul>
-              <li>Upload d'image local, sans stockage serveur.</li>
-              <li>Previsualisation canvas pour montrer le flux.</li>
-              <li>Reconnaissance texte dans le navigateur si Tesseract.js se charge.</li>
-            </ul>
+            <ol id="capability-projects"></ol>
           </aside>
         </div>
       </section>
 
-      <section class="view" id="profile" aria-labelledby="profile-title">
-        <section class="profile-grid">
+      <section class="method-section" aria-labelledby="method-title">
+        <div class="section-heading">
           <div>
-            <p class="eyebrow">Candidat developpeur</p>
-            <h1 id="profile-title">Kyriann Guede</h1>
-            <p class="lead">
-              J'aime construire des projets complets : logique bas niveau, backends Node.js,
-              interfaces web, traitement d'image et outils utilisables.
-            </p>
-            <div class="actions">
-              <a class="button primary" href="mailto:kyriannguede@gmail.com">Me contacter</a>
-              <a class="button" id="profile-github-link" href="#" target="_blank" rel="noreferrer">Voir GitHub</a>
-            </div>
+            <span class="section-number">03 / WORKING MODE</span>
+            <h2 id="method-title">Ma façon d’aborder un problème</h2>
           </div>
+        </div>
 
-          <div class="skill-list" aria-label="Competences">
-            <article>
-              <strong>Langages</strong>
-              <span>C, JavaScript, HTML, CSS, Node.js</span>
-            </article>
-            <article>
-              <strong>Domaines</strong>
-              <span>OCR, authentification, image processing, interfaces web</span>
-            </article>
-            <article>
-              <strong>Ce que je montre</strong>
-              <span>Code public, demos manipulables, README, architecture et resultats.</span>
-            </article>
+        <ol class="method-track">
+          <li><span>01</span><strong>Cartographier</strong><p>Comprendre les flux, les contraintes et les interfaces avant de coder.</p></li>
+          <li><span>02</span><strong>Modéliser</strong><p>Choisir des structures de données et des responsabilités qui rendent le problème lisible.</p></li>
+          <li><span>03</span><strong>Construire</strong><p>Avancer par incréments testables, avec des contrats explicites entre les composants.</p></li>
+          <li><span>04</span><strong>Casser</strong><p>Tester les limites : entrées invalides, concurrence, erreurs réseau, mémoire et reprise.</p></li>
+          <li><span>05</span><strong>Expliquer</strong><p>Documenter les choix pour qu’une autre personne puisse reprendre le système.</p></li>
+        </ol>
+      </section>
+
+      <section class="open-work" id="open-work" aria-labelledby="open-work-title">
+        <div class="section-heading">
+          <div>
+            <span class="section-number">04 / OPEN WORK</span>
+            <h2 id="open-work-title">Ce qui est public sur GitHub</h2>
           </div>
-        </section>
+          <p id="github-status">Synchronisation avec le profil public…</p>
+        </div>
+        <div class="repo-list" id="repo-list"></div>
+      </section>
+
+      <section class="contact-section" id="contact" aria-labelledby="contact-title">
+        <span class="section-number">05 / CONTACT</span>
+        <h2 id="contact-title">Un problème intéressant<br />à démonter ensemble ?</h2>
+        <div class="contact-footer">
+          <p>
+            Je recherche une équipe où progresser sur des sujets exigeants, contribuer concrètement
+            et apprendre auprès d’ingénieurs qui aiment transmettre.
+          </p>
+          <div class="contact-actions">
+            <a class="contact-mail" href="mailto:kyriannguede@gmail.com">kyriannguede@gmail.com</a>
+            <button class="copy-button" id="copy-email" type="button">Copier l’adresse</button>
+          </div>
+        </div>
       </section>
     </main>
 
+    <footer class="site-footer">
+      <span>Kyriann Guede / <span id="current-year"></span></span>
+      <span>Conçu sans template, construit en HTML, CSS &amp; JavaScript.</span>
+    </footer>
+
+    <dialog class="project-dialog" id="project-dialog" aria-labelledby="dialog-title">
+      <div class="dialog-shell">
+        <header class="dialog-header">
+          <span id="dialog-index">PROJECT / 00</span>
+          <button class="dialog-close" id="dialog-close" type="button" aria-label="Fermer le projet">Fermer ×</button>
+        </header>
+        <div class="dialog-content" id="dialog-content"></div>
+      </div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <script src="app.js"></script>
   </body>
 </html>
